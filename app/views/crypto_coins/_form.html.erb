@@ -1,0 +1,32 @@
+<%= form_with(model: crypto_coin, local: true) do |form| %>
+  <% if crypto_coin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(crypto_coin.errors.count, "error") %> prohibited this crypto_coin from being saved:</h2>
+
+      <ul>
+      <% crypto_coin.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :timestamp %>
+    <%= form.datetime_select :timestamp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_price %>
+    <%= form.text_field :last_price %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

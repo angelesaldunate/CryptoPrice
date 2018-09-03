@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @crypto_coin.name %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @crypto_coin.timestamp %>
+</p>
+
+<p>
+  <strong>Last price:</strong>
+  <%= @crypto_coin.last_price %>
+</p>
+
+<%= link_to 'Edit', edit_crypto_coin_path(@crypto_coin) %> |
+<%= link_to 'Back', crypto_coins_path %>
