@@ -22,20 +22,33 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" >
+
     <canvas id="myChart2" >
     </canvas>
   </div>
+  <div id="divData" style="display:none">
+    <%=@data_from_database = CryptoCoin.all.select(:last_price).order(id: :desc ).limit(30) %>
+    <%= last_prices_bitfinex = @data_from_database.map(&:last_price) %>
+    <%=@timestamp_from_database = CryptoCoin.all.select(:timestamp).order(id: :desc ).limit(30)  %>
+    <%= timestamps_bitfinex = @timestamp_from_database.map(&:timestamp)  %>
+  </div>
+
+
+
 
   <script>
-      var ctx = document.getElementById("myChart").getContext('2d');
+
+
+
+      var ctx = document.getElementById("myChart2").getContext('2d');
       var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
-              labels: [1 ,2, 3],
+              labels: <%= raw (timestamps_bitfinex.to_json)%>,
               datasets: [{
                   label: 'Bitfinex',
-                  data: [1, 19, 3],
+                  data: <%= raw(last_prices_bitfinex.to_json)%>,
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(255, 99, 132, 0.2)',
@@ -50,7 +63,7 @@
                   borderWidth: 1
               }, {
                   label: 'Bitstamp',
-                  data: [12, 1, 3],
+                  data: <%= raw (last_prices_bitfinex.to_json)%>,
                   backgroundColor: [
                       'rgba(54, 162, 235, 0.2)',
                       'rgba(54, 162, 235, 0.2)',
@@ -65,7 +78,7 @@
                   borderWidth: 1
               }, {
                   label: 'Buda',
-                  data: [ 5, 2, 1],
+                  data: <%= raw (last_prices_bitfinex.to_json)%>,
                   backgroundColor: [
                       'rgba(255, 206, 86, 0.2)',
                       'rgba(255, 206, 86, 0.2)',
@@ -90,7 +103,7 @@
               }
           }
       });
-      var ctx1 = document.getElementById("myChart2").getContext('2d');
+      var ctx1 = document.getElementById("myChart").getContext('2d');
       var myChart2 = new Chart(ctx1, {
           type: 'bar',
           data: {

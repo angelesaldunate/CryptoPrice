@@ -6,9 +6,9 @@ class ReadDataFromApiJob
 
   def perform
     puts 'Collecting tickers...'
-    Adapters::Bitfinex.save_ticker
-    Adapters::Buda.save_ticker
-    Adapters::Bitstamp.save_ticker
+   # Adapters::Bitfinex.save_ticker
+   # Adapters::Buda.save_ticker
+    #Adapters::Bitstamp.save_ticker
     data = read_from_api
     save(data)
 
