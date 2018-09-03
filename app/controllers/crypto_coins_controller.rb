@@ -7,6 +7,9 @@ class CryptoCoinsController < ApplicationController
   def index
     @crypto_coins = CryptoCoin.all
   end
+  def home
+
+  end
 
   # GET /crypto_coins/1
   # GET /crypto_coins/1.json
