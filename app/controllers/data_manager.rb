@@ -1,27 +1,27 @@
 class DataManager
-  def get_last_btc_price_bitfinex
-    @data_from_database = CryptoCoin.all.select(:last_price).where(market: "BF").order(id: :desc ).limit(30)
+  def get_last_btc_price_bitfinex(coin)
+    @data_from_database = CryptoCoin.all.select(:last_price).where(market: "BF", name: coin).order(id: :desc ).limit(30)
     @last_prices_bitfinex = @data_from_database.map(&:last_price)
   end
-  def get_last_btc_time_bitfinex
-    @timestamp_from_database = CryptoCoin.all.select(:timestamp).where(market: "BF", name: "btcusd").order(id: :desc ).limit(30)
+  def get_last_btc_time_bitfinex(coin)
+    @timestamp_from_database = CryptoCoin.all.select(:timestamp).where(market: "BF", name: coin).order(id: :desc ).limit(30)
     @timestamps_bitfinex = @timestamp_from_database.map(&:timestamp)
     @timestamps_bitfinex.map! {|item| item.strftime("%H:%M:%S")}
   end
-  def get_last_btc_price_bitstamp
-    @data_from_database = CryptoCoin.all.select(:last_price).where(market: "BS", name:"btcusd").order(id: :desc ).limit(30)
+  def get_last_btc_price_bitstamp(coin)
+    @data_from_database = CryptoCoin.all.select(:last_price).where(market: "BS", name: coin).order(id: :desc ).limit(30)
     @last_prices_bitfinex = @data_from_database.map(&:last_price)
   end
-  def get_last_btc_time_bitstamp
-    @timestamp_from_database = CryptoCoin.all.select(:timestamp).where(market: "BS").order(id: :desc ).limit(30)
+  def get_last_btc_time_bitstamp(coin)
+    @timestamp_from_database = CryptoCoin.all.select(:timestamp).where(market: "BS", name: coin).order(id: :desc ).limit(30)
     @timestamps_bitstamp = @timestamp_from_database.map(&:timestamp)
   end
-  def get_last_btc_price_buda
-    @data_from_database = CryptoCoin.all.select(:last_price).where(market: "BD", name: "btc-clp" ).order(id: :desc ).limit(30)
+  def get_last_btc_price_buda(coin)
+    @data_from_database = CryptoCoin.all.select(:last_price).where(market: "BD", name: coin ).order(id: :desc ).limit(30)
     @last_prices_buda = @data_from_database.map(&:last_price)
   end
-  def get_last_btc_time_buda
-    @timestamp_from_database = CryptoCoin.all.select(:timestamp).where(market: "BD").order(id: :desc ).limit(30)
+  def get_last_btc_time_buda(name)
+    @timestamp_from_database = CryptoCoin.all.select(:timestamp).where(market: "BD", name: coin).order(id: :desc ).limit(30)
     @timestamps_bitfinex = @timestamp_from_database.map(&:timestamp)
   end
   def substracted(one,two,three)
@@ -55,7 +55,7 @@ class DataManager
     one_day = Time.now-1.day
     cr = CryptoCoin.select(:last_price).where("timestamp BETWEEN ? AND ?",one_day, now )
     times = CryptoCoin.select(:timestamp).where("timestamp BETWEEN ? AND ?",one_day, now )
-    times = times.where(market: "BS").map(&:timestamp)
+    times = times.where(market: "BS", name: coin).or(times.where(market: "BS", name: coinbuda)).map(&:timestamp)
     filtered_time = []
     count = 0
     times.each do |item|

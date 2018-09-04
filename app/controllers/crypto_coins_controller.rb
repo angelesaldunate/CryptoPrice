@@ -10,11 +10,11 @@ class CryptoCoinsController < ApplicationController
   end
   def home
     dm = DataManager.new
-    @timestamps_bitfinex_nr = dm.get_last_btc_time_bitfinex
-    @timestamps_bitfinex = dm.get_last_btc_time_bitfinex.reverse
-    @prices_bitfinex = dm.get_last_btc_price_bitfinex
-    @prices_bitstamp = dm.get_last_btc_price_bitstamp
-    @prices_buda = dm.get_last_btc_price_buda
+    @timestamps_bitfinex_nr = dm.get_last_btc_time_bitfinex("btcusd")
+    @timestamps_bitfinex = dm.get_last_btc_time_bitfinex("btcusd").reverse
+    @prices_bitfinex = dm.get_last_btc_price_bitfinex("btcusd")
+    @prices_bitstamp = dm.get_last_btc_price_bitstamp("btcusd")
+    @prices_buda = dm.get_last_btc_price_buda("btc-clp")
     sub = dm.substracted(@prices_bitfinex,@prices_buda,@prices_bitstamp)
     @last_prices_bitfinex_nr = sub[:x]
     @last_prices_buda_nr = sub[:y]
@@ -31,8 +31,68 @@ class CryptoCoinsController < ApplicationController
 
   end
   def ltc
-  end
+    dm = DataManager.new
+    @timestamps_bitfinex_nr = dm.get_last_btc_time_bitfinex("ltcusd")
+    @timestamps_bitfinex = dm.get_last_btc_time_bitfinex("ltcusd").reverse
+    @prices_bitfinex = dm.get_last_btc_price_bitfinex("ltcusd")
+    @prices_bitstamp = dm.get_last_btc_price_bitstamp("ltcusd")
+    @prices_buda = dm.get_last_btc_price_buda("ltc-clp")
+    sub = dm.substracted(@prices_bitfinex,@prices_buda,@prices_bitstamp)
+    @last_prices_bitfinex_nr = sub[:x]
+    @last_prices_buda_nr = sub[:y]
+    @last_prices_bitstamp_nr = sub[:z]
 
+    @last_prices_bitfinex = sub[:x].reverse
+    @last_prices_buda = sub[:y].reverse
+    @last_prices_bitstamp = sub[:z].reverse
+    daily = dm.latest_day_hour("ltcusd", "ltc-clp")
+    @day_bitfinex = daily[:x]
+    @day_buda = daily[:y]
+    @day_bitstamp = daily[:z]
+    @day_timestamps = daily[:times]
+  end
+  def eth
+    dm = DataManager.new
+    @timestamps_bitfinex_nr = dm.get_last_btc_time_bitfinex("ethusd")
+    @timestamps_bitfinex = dm.get_last_btc_time_bitfinex("ethusd").reverse
+    @prices_bitfinex = dm.get_last_btc_price_bitfinex("ethusd")
+    @prices_bitstamp = dm.get_last_btc_price_bitstamp("ethusd")
+    @prices_buda = dm.get_last_btc_price_buda("eth-clp")
+    sub = dm.substracted(@prices_bitfinex,@prices_buda,@prices_bitstamp)
+    @last_prices_bitfinex_nr = sub[:x]
+    @last_prices_buda_nr = sub[:y]
+    @last_prices_bitstamp_nr = sub[:z]
+
+    @last_prices_bitfinex = sub[:x].reverse
+    @last_prices_buda = sub[:y].reverse
+    @last_prices_bitstamp = sub[:z].reverse
+    daily = dm.latest_day_hour("ethusd", "eth-clp")
+    @day_bitfinex = daily[:x]
+    @day_buda = daily[:y]
+    @day_bitstamp = daily[:z]
+    @day_timestamps = daily[:times]
+  end
+  def bch
+    dm = DataManager.new
+    @timestamps_bitfinex_nr = dm.get_last_btc_time_bitfinex("bchusd")
+    @timestamps_bitfinex = dm.get_last_btc_time_bitfinex("bchusd").reverse
+    @prices_bitfinex = dm.get_last_btc_price_bitfinex("bchusd")
+    @prices_bitstamp = dm.get_last_btc_price_bitstamp("bchusd")
+    @prices_buda = dm.get_last_btc_price_buda("bch-clp")
+    sub = dm.substracted(@prices_bitfinex,@prices_buda,@prices_bitstamp)
+    @last_prices_bitfinex_nr = sub[:x]
+    @last_prices_buda_nr = sub[:y]
+    @last_prices_bitstamp_nr = sub[:z]
+
+    @last_prices_bitfinex = sub[:x].reverse
+    @last_prices_buda = sub[:y].reverse
+    @last_prices_bitstamp = sub[:z].reverse
+    daily = dm.latest_day_hour("bchusd", "bch-clp")
+    @day_bitfinex = daily[:x]
+    @day_buda = daily[:y]
+    @day_bitstamp = daily[:z]
+    @day_timestamps = daily[:times]
+  end
   # GET /crypto_coins/1
   # GET /crypto_coins/1.json
   def show

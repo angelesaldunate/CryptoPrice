@@ -45,14 +45,12 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
 
         </li>
         <li>
-          <a href=<%= root_path %>
-            <p style="font-size:20px">ETH</p>
-          </a>
+          <%= link_to "ETH" , eth_url, {:style=>'font-size:20px',} %>
+
         </li>
         <li>
-          <a href=<%= root_path %>
-                 <p style="font-size:20px">Maps</p>
-          </a>
+          <%= link_to "BCH" , bch_url, {:style=>'font-size:20px',} %>
+
         </li>
       </ul>
     </div>
@@ -318,6 +316,7 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
 <script src="../assets/js/plugins/chartjs.min.js"></script>
 <!--  Notifications Plugin    -->
 <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
 
 <script>
 

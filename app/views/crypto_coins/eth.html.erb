@@ -15,7 +15,7 @@
   <!--<link href="/home/angeles/Crypto/app/assets/stylesheets/ /> -->
 
 </head>
-<%=@name = "LTC" %>
+<%=@name = "ETH" %>
 <%@last_time = Time.now %>
 <body class="">
 <div class="wrapper ">
@@ -40,7 +40,8 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
           </a>
         </li>
         <li>
-          <%= link_to "LTC" , ltc_path, {:style=>'font-size:20px',} %>
+          <%= link_to "LTC" , ltc_url, {:style=>'font-size:20px',} %>
+
 
         </li>
         <li>
@@ -315,6 +316,7 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
 <script src="../assets/js/plugins/chartjs.min.js"></script>
 <!--  Notifications Plugin    -->
 <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+
 
 <script>
 
