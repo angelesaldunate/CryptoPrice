@@ -23,12 +23,14 @@ class CryptoCoinsController < ApplicationController
     @last_prices_bitfinex = sub[:x].reverse
     @last_prices_buda = sub[:y].reverse
     @last_prices_bitstamp = sub[:z].reverse
-    daily = dm.latest_day_hour
+    daily = dm.latest_day_hour("btcusd", "btc-clp")
     @day_bitfinex = daily[:x]
     @day_buda = daily[:y]
     @day_bitstamp = daily[:z]
     @day_timestamps = daily[:times]
 
+  end
+  def ltc
   end
 
   # GET /crypto_coins/1

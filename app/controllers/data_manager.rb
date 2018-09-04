@@ -50,7 +50,7 @@ class DataManager
     end
     {:x => @bitfinex, :y => @buda, :z =>@bitstamp}
   end
-  def latest_day_hour
+  def latest_day_hour(coin, coinbuda)
     now = Time.now
     one_day = Time.now-1.day
     cr = CryptoCoin.select(:last_price).where("timestamp BETWEEN ? AND ?",one_day, now )
@@ -65,9 +65,9 @@ class DataManager
       count+=1
     end
     filtered_time.map! {|item| item.strftime("%H:%M:%S")}
-    crbs = cr.where(market: "BS").map(&:last_price)
-    crbd = cr.where(market: "BD").map(&:last_price)
-    crbf = cr.where(market: "BF").map(&:last_price)
+    crbs = cr.where(market: "BS", name: coin).map(&:last_price)
+    crbd = cr.where(market: "BD", name: coinbuda).map(&:last_price)
+    crbf = cr.where(market: "BF", name: coin).map(&:last_price)
 
     final_crbs = []
     count = 0

@@ -6,18 +6,20 @@
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <%= stylesheet_link_tag "https://use.fontawesome.com/releases/v5.0.6/css/all.css" %>
+
   <!-- CSS Files -->
-  <link href="../assets/stylesheet/bootstrap.min.css" rel="stylesheet" />
-  <link href="/home/angeles/Crypto/app/assets/stylesheets/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
+  <%= stylesheet_link_tag "bootstrap.min.css" %>
+
+  <%= stylesheet_link_tag "now-ui-dashboard.css" %>
+  <!--<link href="/home/angeles/Crypto/app/assets/stylesheets/ /> -->
+
 </head>
 <%=@name = "BTC" %>
 <%@last_time = Time.now %>
 <body class="">
 <div class="wrapper ">
-  <div class="sidebar" data-color="black">
+  <div class="sidebar" data-color = "blue">
     <!--
 Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
 -->
@@ -32,15 +34,15 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
     <div class="sidebar-wrapper" >
       <ul class="nav">
         <li>
+
           <a href=<%=root_path %>
                  <p style="font-size:20px">BTC</p>
           </a>
         </li>
         <li>
-          <a href=<%= root_path %>
+          <%= link_to "LTC" , ltc_url, {:style=>'font-size:20px',} %>
 
-                 <p style="font-size:20px">LTC</p>
-          </a>
+
         </li>
         <li>
           <a href=<%= root_path %>
@@ -175,7 +177,7 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
             <div class="card-footer">
               <hr>
               <div class="stats">
-                <image src ="images/apple-icon.png" class="now-ui-icons loader_refresh spin"></image> Updated <%=((Time.now - @last_time).seconds * 10000).round%> seconds ago
+                <%= image_tag("btc.png", class: "now-ui-icons loader_refresh spin")%> Updated <%=((Time.now - @last_time).seconds * 10000).round%> seconds ago
               </div>
             </div>
           </div>
@@ -282,7 +284,26 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
         </div>
       </div>
     </div>
-
+    <footer class="footer">
+      <div class="container-fluid">
+        <nav>
+          <ul>
+            <li>
+              <%=link_to  "BITFINEX", "https://www.bitfinex.com/" %>
+              </a>
+            </li>
+            <li>
+              <%=link_to  "BUDA", "https://www.buda.com" %>
+              </a>
+            </li>
+            <li>
+              <%=link_to  "BITSTAMP", "https://www.bitstamp.net/" %>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
   </div>
 </div>
 </body>

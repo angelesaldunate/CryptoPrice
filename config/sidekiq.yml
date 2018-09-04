@@ -1,5 +1,5 @@
 
 :schedule:
   read_data_from_api_job:
-    every: 10s
+    every: 20s
     class: ReadDataFromApiJob
