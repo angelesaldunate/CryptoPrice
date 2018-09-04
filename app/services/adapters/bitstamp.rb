@@ -3,7 +3,7 @@ module Adapters
     class << self
       def save_ticker(coin)
         data = read_from_api(coin)
-        save(data)
+        save(data,coin)
       end
       def read_from_api(coin)
         url = URI("https://www.bitstamp.net/api/v2/ticker/#{coin}/")
@@ -14,9 +14,9 @@ module Adapters
         JSON.parse(response.body)
       end
 
-      def save(data)
+      def save(data,coin)
         puts data
-        name = "btcusd"
+        name = coin
         last_price = data['last']
         timestamp = Time.at(data['timestamp'].to_f)
 

@@ -4,12 +4,12 @@ class DataManager
     @last_prices_bitfinex = @data_from_database.map(&:last_price)
   end
   def get_last_btc_time_bitfinex
-    @timestamp_from_database = CryptoCoin.all.select(:timestamp).where(market: "BF").order(id: :desc ).limit(30)
+    @timestamp_from_database = CryptoCoin.all.select(:timestamp).where(market: "BF", name: "btcusd").order(id: :desc ).limit(30)
     @timestamps_bitfinex = @timestamp_from_database.map(&:timestamp)
     @timestamps_bitfinex.map! {|item| item.strftime("%H:%M:%S")}
   end
   def get_last_btc_price_bitstamp
-    @data_from_database = CryptoCoin.all.select(:last_price).where(market: "BS").order(id: :desc ).limit(30)
+    @data_from_database = CryptoCoin.all.select(:last_price).where(market: "BS", name:"btcusd").order(id: :desc ).limit(30)
     @last_prices_bitfinex = @data_from_database.map(&:last_price)
   end
   def get_last_btc_time_bitstamp
@@ -17,7 +17,7 @@ class DataManager
     @timestamps_bitstamp = @timestamp_from_database.map(&:timestamp)
   end
   def get_last_btc_price_buda
-    @data_from_database = CryptoCoin.all.select(:last_price).where(market: "BD").order(id: :desc ).limit(30)
+    @data_from_database = CryptoCoin.all.select(:last_price).where(market: "BD", name: "btc-clp" ).order(id: :desc ).limit(30)
     @last_prices_buda = @data_from_database.map(&:last_price)
   end
   def get_last_btc_time_buda
@@ -56,12 +56,46 @@ class DataManager
     cr = CryptoCoin.select(:last_price).where("timestamp BETWEEN ? AND ?",one_day, now )
     times = CryptoCoin.select(:timestamp).where("timestamp BETWEEN ? AND ?",one_day, now )
     times = times.where(market: "BS").map(&:timestamp)
-    times.map! {|item| item.strftime("%H:%M:%S")}
-    puts(times)
+    filtered_time = []
+    count = 0
+    times.each do |item|
+        if count%60 ==0
+          filtered_time.push(item)
+        end
+      count+=1
+    end
+    filtered_time.map! {|item| item.strftime("%H:%M:%S")}
     crbs = cr.where(market: "BS").map(&:last_price)
     crbd = cr.where(market: "BD").map(&:last_price)
     crbf = cr.where(market: "BF").map(&:last_price)
-    {:x => crbf, :y => crbd, :z => crbs, :times =>times}
+
+    final_crbs = []
+    count = 0
+    crbs.each do |item|
+      if count%60 ==0
+        final_crbs.push(item)
+      end
+      count+=1
+    end
+
+    final_crbd = []
+    count = 0
+    crbd.each do |item|
+      if count%60 ==0
+        final_crbd.push(item)
+      end
+      count+=1
+    end
+    final_crbf = []
+    count = 0
+    crbf.each do |item|
+      if count%60 ==0
+        final_crbf.push(item)
+      end
+      count+=1
+    end
+
+    {:x => final_crbf, :y => final_crbd, :z => final_crbs, :times =>filtered_time}
   end
 
 end
