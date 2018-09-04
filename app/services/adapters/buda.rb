@@ -23,7 +23,7 @@ module Adapters
         puts timestamp
         @crypto = CryptoCoin.new
         @crypto.name = name
-        @crypto.last_price = last_price
+        @crypto.last_price = (last_price.to_f / 695.0)
         @crypto.timestamp = timestamp
         @crypto.market = "BD"
         @crypto.save

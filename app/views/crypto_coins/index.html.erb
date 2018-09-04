@@ -28,10 +28,10 @@
     </canvas>
   </div>
   <div id="divData" style="display:none">
-    <%=@data_from_database = CryptoCoin.all.select(:last_price).order(id: :desc ).limit(30) %>
-    <%= last_prices_bitfinex = @data_from_database.map(&:last_price) %>
-    <%=@timestamp_from_database = CryptoCoin.all.select(:timestamp).order(id: :desc ).limit(30)  %>
-    <%= timestamps_bitfinex = @timestamp_from_database.map(&:timestamp)  %>
+    <%=@databs_from_database = CryptoCoin.all.select(:last_price).where(market: "BS").order(id: :desc ).limit(30) %>
+    <%= last_prices_bitfinex = @databs_from_database.map(&:last_price) %>
+    <%=@timestampbs_from_database = CryptoCoin.all.select(:timestamp).where(market: "BS").order(id: :desc ).limit(30)  %>
+    <%= timestamps_bitfinex = @timestampbs_from_database.map(&:timestamp)  %>
   </div>
 
 

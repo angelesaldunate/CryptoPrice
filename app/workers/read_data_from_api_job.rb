@@ -6,9 +6,13 @@ class ReadDataFromApiJob
 
   def perform
     puts 'Collecting tickers...'
-    Adapters::Bitfinex.save_ticker("btcusd")
-    Adapters::Buda.save_ticker("btc-clp")
-    Adapters::Bitstamp.save_ticker("btcusd")
+    t1 = Thread.new do Adapters::Bitfinex.save_ticker("btcusd")
+    end
+    t2 = Thread.new do Adapters::Buda.save_ticker("btc-clp")
+    end
+    t3 = Thread.new do Adapters::Bitstamp.save_ticker("btcusd")
+    end
+
 
 
   end

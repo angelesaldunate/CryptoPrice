@@ -1,10 +1,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Now UI Dashboard by Creative Tim</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -15,7 +13,8 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="../assets/demo/demo.css" rel="stylesheet" />
 </head>
-
+<%=@name = "BTC" %>
+<%@last_time = Time.now %>
 <body class="">
 <div class="wrapper ">
   <div class="sidebar" data-color="black">
@@ -33,12 +32,13 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
     <div class="sidebar-wrapper">
       <ul class="nav">
         <li>
-          <a href=<%= root_path %>
+          <a href=<%=root_path %>
                  <p style="font-size:20px">BTC</p>
           </a>
         </li>
         <li>
           <a href=<%= root_path %>
+
                  <p style="font-size:20px">LTC</p>
           </a>
         </li>
@@ -89,7 +89,7 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
           <div class="card card-chart">
             <div class="card-header">
               <h5 class="card-category">Price Difference Statistics</h5>
-              <h4 class="card-title">Last 5 Minutes</h4>
+              <h4 class="card-title">Difference Last 5 Minutes</h4>
             </div>
             <div class="card-body">
               <div class="chart-area" >
@@ -98,7 +98,6 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
             </div>
             <div class="card-footer">
               <div class="stats">
-                <%=link_to "Last 7 days" , root_path%>
               </div>
             </div>
           </div>
@@ -108,74 +107,67 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
         <div class="col-md-6">
           <div class="card card-tasks">
             <div class="card-header">
-              <h5 class="card-category">Backend development</h5>
-              <h4 class="card-title">Tasks</h4>
+              <h5 class="card-category">Best Deals</h5>
+              <h4 class="card-title">Current Best Deals</h4>
             </div>
             <div class="card-body">
               <div class="table-full-width table-responsive">
-                <table class="table">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Lowest Market</th>
+                    <th scope="col">Highest Market</th>
+                    <th scope="col">Difference</th>
+                    <th scope="col">Time</th>
+                  </tr>
+                  </thead>
                   <tbody>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" checked="">
-                          <span class="form-check-sign"></span>
-                        </label>
-                      </div>
-                    </td>
+                  <% for i in 0..5 %>
+                    <% if @last_prices_bitfinex_nr[i]==0 %>
+                      <tr>
+                        <td><%=(i+1).to_s%></td>
+                        <td>Bitfinex</td>
+                        <% if @last_prices_bitstamp_nr[i]>@last_prices_buda_nr[i] %>
+                          <td>Bitstamp</td>
+                          <td><% @last_prices_bitstamp_nr[i] %></td>
+                        <%else %>
+                          <td>Buda</td>
+                          <td><%= @last_prices_buda_nr[i] %></td>
+                        <%end %>
+                        <td><%= @timestamps_bitfinex_nr[i] %></td>
+                      </tr>
+                  <% elsif @last_prices_bitstamp_nr[i]==0%>
+                      <tr>
+                        <td><%=(i+1).to_s%></td>
+                        <td>Bitstamp</td>
+                        <% if @last_prices_bitfinex_nr[i]>@last_prices_buda_nr[i] %>
+                          <td>Bitfinex</td>
+                          <td><% @last_prices_bitfinex_nr[i] %></td>
+                        <%else %>
+                          <td>Buda</td>
+                          <td><%= @last_prices_buda_nr[i] %></td>
+                        <%end %>
+                        <td><%= @timestamps_bitfinex_nr[i] %></td>
+                      </tr>
+                    <%else %>
+                      <tr>
+                        <td><%=(i+1).to_s%></td>
+                        <td>Buda</td>
+                        <% if @last_prices_bitfinex_nr[i]>@last_prices_bitstamp_nr[i] %>
+                          <td>Bitfinex</td>
+                          <td><% @last_prices_bitfinex_nr[i] %></td>
+                        <%else %>
+                          <td>Bitstamp</td>
+                          <td><%= @last_prices_bitstamp_nr[i] %></td>
+                        <%end %>
+                        <td><%= @timestamps_bitfinex_nr[i] %></td>
+                      </tr>
 
-                    <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                      </button>
-                      <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox">
-                          <span class="form-check-sign"></span>
-                        </label>
-                      </div>
-                    </td>
+                    <%end %>
 
-                    <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                      </button>
-                      <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input class="form-check-input" type="checkbox" checked="">
-                          <span class="form-check-sign"></span>
-                        </label>
-                      </div>
-                    </td>
+                  <%end %>
 
-                    <td class="text-left">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                    </td>
-                    <td class="td-actions text-right">
-                      <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                        <i class="now-ui-icons ui-2_settings-90"></i>
-                      </button>
-                      <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                        <i class="now-ui-icons ui-1_simple-remove"></i>
-                      </button>
-                    </td>
-                  </tr>
                   </tbody>
                 </table>
               </div>
@@ -183,7 +175,7 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
             <div class="card-footer">
               <hr>
               <div class="stats">
-                <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
+                <image src ="images/apple-icon.png" class="now-ui-icons loader_refresh spin"></image> Updated <%= ((Time.now - @last_time).minutes).round %> minutes ago
               </div>
             </div>
           </div>
@@ -294,12 +286,7 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
   </div>
 </div>
 </body>
-<div id="divData" style="display:none">
-  <%=@data_from_database = CryptoCoin.all.select(:last_price).order(id: :desc ).limit(30) %>
-  <%= last_prices_bitfinex = @data_from_database.map(&:last_price) %>
-  <%=@timestamp_from_database = CryptoCoin.all.select(:timestamp).order(id: :desc ).limit(30)  %>
-  <%= timestamps_bitfinex = @timestamp_from_database.map(&:timestamp)  %>
-</div>
+
 <!--   Core JS Files   -->
 <script src="../assets/js/core/jquery.min.js"></script>
 <script src="../assets/js/core/popper.min.js"></script>
@@ -317,10 +304,10 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: <%= raw (timestamps_bitfinex.to_json)%>,
+            labels: <%= raw (@timestamps_bitfinex.to_json)%>,
             datasets: [{
                 label: 'Bitfinex',
-                data: <%= raw(last_prices_bitfinex.to_json)%>,
+                data: <%= raw(@last_prices_bitfinex.to_json)%>,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 99, 132, 0.2)',
@@ -389,7 +376,7 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
                 borderWidth: 1
             }, {
                 label: 'Bitstamp',
-                data: <%= raw (last_prices_bitfinex.to_json)%>,
+                data: <%= raw (@last_prices_bitstamp.to_json)%>,
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -458,7 +445,7 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
                 borderWidth: 1
             }, {
                 label: 'Buda',
-                data: <%= raw (last_prices_bitfinex.to_json)%>,
+                data: <%= raw (@last_prices_buda.to_json)%>,
                 backgroundColor: [
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
@@ -546,8 +533,8 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
 
 
     var dataFirst = {
-        label: "Car A - Speed (mph)",
-        data: [0, 59, 75, 20, 20, 55, 40],
+        label: "Bitfinex",
+        data: <%= raw(@day_bitfinex.to_json)%>,
         lineTension: 0.3,
         fill: false,
         borderColor: 'red',
@@ -562,8 +549,8 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
     };
 
     var dataSecond = {
-        label: "Car B - Speed (mph)",
-        data: [20, 15, 60, 60, 65, 30, 70],
+        label: "Bitstamp",
+        data: <%= raw(@day_bitstamp.to_json)%>,
         lineTension: 0.3,
         fill: false,
         borderColor: 'purple',
@@ -575,10 +562,24 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
         pointHitRadius: 30,
         pointBorderWidth: 2
     };
+    var dataThird = {
+        label: "Buda",
+        data: <%= raw(@day_buda.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'yellow',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'purple',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
 
     var speedData = {
-        labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
-        datasets: [dataFirst, dataSecond]
+        labels: <%= raw(@day_timestamps.to_json) %>,
+        datasets: [dataFirst, dataSecond, dataThird]
     };
 
     var chartOptions = {

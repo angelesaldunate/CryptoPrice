@@ -1,4 +1,5 @@
 class CryptoCoinsController < ApplicationController
+  require 'data_manager'
 
   before_action :set_crypto_coin, only: [:show, :edit, :update, :destroy]
 
@@ -8,6 +9,25 @@ class CryptoCoinsController < ApplicationController
     @crypto_coins = CryptoCoin.all
   end
   def home
+    dm = DataManager.new
+    @timestamps_bitfinex_nr = dm.get_last_btc_time_bitfinex
+    @timestamps_bitfinex = dm.get_last_btc_time_bitfinex.reverse
+    @prices_bitfinex = dm.get_last_btc_price_bitfinex
+    @prices_bitstamp = dm.get_last_btc_price_bitstamp
+    @prices_buda = dm.get_last_btc_price_buda
+    sub = dm.substracted(@prices_bitfinex,@prices_buda,@prices_bitstamp)
+    @last_prices_bitfinex_nr = sub[:x]
+    @last_prices_buda_nr = sub[:y]
+    @last_prices_bitstamp_nr = sub[:z]
+
+    @last_prices_bitfinex = sub[:x].reverse
+    @last_prices_buda = sub[:y].reverse
+    @last_prices_bitstamp = sub[:z].reverse
+    daily = dm.latest_day_hour
+    @day_bitfinex = daily[:x]
+    @day_buda = daily[:y]
+    @day_bitstamp = daily[:z]
+    @day_timestamps = daily[:times]
 
   end
 
