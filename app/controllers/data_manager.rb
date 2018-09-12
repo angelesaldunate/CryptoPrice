@@ -59,7 +59,7 @@ class DataManager
     filtered_time = []
     count = 0
     times.each do |item|
-        if count%60 ==0
+        if count%20 ==0
           filtered_time.push(item)
         end
       count+=1
@@ -72,7 +72,7 @@ class DataManager
     final_crbs = []
     count = 0
     crbs.each do |item|
-      if count%60 ==0
+      if count%20 ==0
         final_crbs.push(item)
       end
       count+=1
@@ -81,7 +81,7 @@ class DataManager
     final_crbd = []
     count = 0
     crbd.each do |item|
-      if count%60 ==0
+      if count%20 ==0
         final_crbd.push(item)
       end
       count+=1
@@ -89,13 +89,47 @@ class DataManager
     final_crbf = []
     count = 0
     crbf.each do |item|
-      if count%60 ==0
+      if count%20 ==0
         final_crbf.push(item)
       end
       count+=1
     end
 
     {:x => final_crbf, :y => final_crbd, :z => final_crbs, :times =>filtered_time}
+  end
+
+  def oscilator(values)
+    k = []
+    s = []
+    mini = values.min
+    maxi = values.max
+    values.each do |i|
+      k.push((i-mini)/(maxi-mini)*100)
+    end
+    (5..k.size+4).each do |i|
+      s.push(k[i-5..i].inject(:+)/5)
+    end
+    media = []
+    sold = []
+    buy = []
+    values.each do |i|
+      media.push((k.max+k.min)/2)
+      sold.push((k.max+k.min)/2*80/50)
+      buy.push((k.max+k.min)/2*20/50)
+    end
+
+    todo = ""
+    if values[-1]>= sold[-1]
+      todo = "SELL"
+    elsif values[-1]<= buy[-1]
+      todo = "BUY"
+    else
+      todo = "WAIT"
+    end
+
+
+
+    {:k => k, :s => s, :media =>media, :sold=>sold, :buy=>buy, :todo => todo}
   end
 
 end

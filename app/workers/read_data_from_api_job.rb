@@ -30,9 +30,18 @@ class ReadDataFromApiJob
     end
     t12 = Thread.new do Adapters::Bitstamp.save_ticker("bchusd")
     end
-
-
-
+    t1.join(0.20)
+    t2.join(0.20)
+    t3.join(0.20)
+    t4.join(0.20)
+    t5.join(0.20)
+    t6.join(0.20)
+    t7.join(0.20)
+    t8.join(0.20)
+    t9.join(0.20)
+    t10.join(0.20)
+    t11.join(0.20)
+    t12.join(0.20)
 
 
 

@@ -28,6 +28,12 @@ class CryptoCoinsController < ApplicationController
     @day_buda = daily[:y]
     @day_bitstamp = daily[:z]
     @day_timestamps = daily[:times]
+    @todobitfinex = dm.oscilator(@day_bitfinex)[:todo]
+    @todobuda = dm.oscilator(@day_buda)[:todo]
+    @todobitstamp= dm.oscilator(@day_bitstamp)[:todo]
+
+
+
 
   end
   def ltc
@@ -50,6 +56,94 @@ class CryptoCoinsController < ApplicationController
     @day_buda = daily[:y]
     @day_bitstamp = daily[:z]
     @day_timestamps = daily[:times]
+    @todobitfinex = dm.oscilator(@day_bitfinex)[:todo]
+    @todobuda = dm.oscilator(@day_buda)[:todo]
+    @todobitstamp= dm.oscilator(@day_bitstamp)[:todo]
+
+  end
+  def statsbtc
+    dm = DataManager.new
+    daily = dm.latest_day_hour("btcusd", "btc-clp")
+    @day_bitfinex = daily[:x]
+    @day_buda = daily[:y]
+    @day_bitstamp = daily[:z]
+    @day_timestamps = daily[:times]
+    sobitfinex = dm.oscilator(@day_bitfinex)
+    sobbuda = dm.oscilator(@day_buda)
+    sobitstamp = dm.oscilator(@day_bitstamp)
+    @kbitfinex = sobitfinex[:k]
+    @sbitfinex = sobitfinex[:s]
+    @medbitfinex = sobitfinex[:media]
+    @soldbitfinex = sobitfinex[:sold]
+    @buybitfinex = sobitfinex[:buy]
+
+    @kbitstamp = sobitstamp[:k]
+    @sbitstamp = sobitstamp[:s]
+    @medbitstamp = sobitstamp[:media]
+    @soldbitstamp = sobitstamp[:sold]
+    @buybitstamp = sobitstamp[:buy]
+
+    @kbuda = sobbuda[:k]
+    @sbuda = sobbuda[:s]
+    @medbuda = sobbuda[:media]
+    @soldbuda = sobbuda[:sold]
+    @buybuda = sobbuda[:buy]
+  end
+  def statsltc
+    dm = DataManager.new
+    daily = dm.latest_day_hour("ltcusd", "ltc-clp")
+    @day_bitfinex = daily[:x]
+    @day_buda = daily[:y]
+    @day_bitstamp = daily[:z]
+    @day_timestamps = daily[:times]
+    sobitfinex = dm.oscilator(@day_bitfinex)
+    sobbuda = dm.oscilator(@day_buda)
+    sobitstamp = dm.oscilator(@day_bitstamp)
+    @kbitfinex = sobitfinex[:k]
+    @sbitfinex = sobitfinex[:s]
+    @medbitfinex = sobitfinex[:media]
+    @soldbitfinex = sobitfinex[:sold]
+    @buybitfinex = sobitfinex[:buy]
+
+    @kbitstamp = sobitstamp[:k]
+    @sbitstamp = sobitstamp[:s]
+    @medbitstamp = sobitstamp[:media]
+    @soldbitstamp = sobitstamp[:sold]
+    @buybitstamp = sobitstamp[:buy]
+
+    @kbuda = sobbuda[:k]
+    @sbuda = sobbuda[:s]
+    @medbuda = sobbuda[:media]
+    @soldbuda = sobbuda[:sold]
+    @buybuda = sobbuda[:buy]
+  end
+  def statseth
+    dm = DataManager.new
+    daily = dm.latest_day_hour("ethusd", "eth-clp")
+    @day_bitfinex = daily[:x]
+    @day_buda = daily[:y]
+    @day_bitstamp = daily[:z]
+    @day_timestamps = daily[:times]
+    sobitfinex = dm.oscilator(@day_bitfinex)
+    sobbuda = dm.oscilator(@day_buda)
+    sobitstamp = dm.oscilator(@day_bitstamp)
+    @kbitfinex = sobitfinex[:k]
+    @sbitfinex = sobitfinex[:s]
+    @medbitfinex = sobitfinex[:media]
+    @soldbitfinex = sobitfinex[:sold]
+    @buybitfinex = sobitfinex[:buy]
+
+    @kbitstamp = sobitstamp[:k]
+    @sbitstamp = sobitstamp[:s]
+    @medbitstamp = sobitstamp[:media]
+    @soldbitstamp = sobitstamp[:sold]
+    @buybitstamp = sobitstamp[:buy]
+
+    @kbuda = sobbuda[:k]
+    @sbuda = sobbuda[:s]
+    @medbuda = sobbuda[:media]
+    @soldbuda = sobbuda[:sold]
+    @buybuda = sobbuda[:buy]
   end
   def eth
     dm = DataManager.new
@@ -71,6 +165,10 @@ class CryptoCoinsController < ApplicationController
     @day_buda = daily[:y]
     @day_bitstamp = daily[:z]
     @day_timestamps = daily[:times]
+    @todobitfinex = dm.oscilator(@day_bitfinex)[:todo]
+    @todobuda = dm.oscilator(@day_buda)[:todo]
+    @todobitstamp= dm.oscilator(@day_bitstamp)[:todo]
+
   end
   def bch
     dm = DataManager.new

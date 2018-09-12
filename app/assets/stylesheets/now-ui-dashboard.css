@@ -2850,6 +2850,46 @@ Created using IcoMoon - icomoon.io
     font-size: 13px; }
     .panel-header .header .category a {
       color: #FFFFFF; }
+.panel-header2 {
+    height: 260px;
+    padding-top: 80px;
+    padding-bottom: 45px;
+    background: #141E30;
+    /* fallback for old browsers */
+    background: -webkit-gradient(linear, left top, right top, from(#ffc2cf), color-stop(60%, #ffdad8), to(#ffe7ee));
+    background: linear-gradient(to right, #ffc2cf 0%, #ffdad8 60%, #ffe7ee 100%);
+    position: relative;
+    overflow: hidden; }
+.panel-header4 {
+    height: 260px;
+    padding-top: 80px;
+    padding-bottom: 45px;
+    background: #141E30;
+    /* fallback for old browsers */
+    background: -webkit-gradient(linear, left top, right top, from(#fffacd), color-stop(60%, #fffdd9), to(#ffffff));
+    background: linear-gradient(to right, #fffacd 0%, #fffdd9 60%, #ffffff 100%);
+    position: relative;
+    overflow: hidden; }
+.panel-header .header .title {
+    color: #FFFFFF; }
+.panel-header .header .category {
+    max-width: 600px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 auto;
+    font-size: 13px; }
+.panel-header .header .category a {
+    color: #FFFFFF; }
+.panel-header3 {
+    height: 260px;
+    padding-top: 80px;
+    padding-bottom: 45px;
+    background: #141E30;
+    /* fallback for old browsers */
+    background: -webkit-gradient(linear, left top, right top, from(#c5fffa), color-stop(60%, #edfdff), to(#daf3ff));
+    background: linear-gradient(to right, #c5fffa 0%, #edfdff 60%, #daf3ff 100%);
+    position: relative;
+    overflow: hidden; }
+
 
 .panel-header-sm {
   height: 135px; }
