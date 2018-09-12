@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'statsbtc', to: 'crypto_coins#statsbtc'
   get 'statsltc', to: 'crypto_coins#statsltc'
   get 'statseth', to: 'crypto_coins#statseth'
+  get 'statsbch', to: 'crypto_coins#statsbch'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

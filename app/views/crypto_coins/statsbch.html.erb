@@ -1,0 +1,566 @@
+
+<head>
+  <meta charset="utf-8" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <%= stylesheet_link_tag "https://use.fontawesome.com/releases/v5.0.6/css/all.css" %>
+
+  <!-- CSS Files -->
+  <%= stylesheet_link_tag "bootstrap.min.css" %>
+
+  <%= stylesheet_link_tag "now-ui-dashboard.css" %>
+  <!--<link href="/home/angeles/Crypto/app/assets/stylesheets/ /> -->
+
+</head>
+<%=@name = "BCH" %>
+<%@last_time = Time.now %>
+<body class="">
+<div class="wrapper ">
+  <div class="sidebar" data-color = "blue">
+    <!--
+Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+-->
+    <div class="logo">
+      <a  class="simple-text logo-mini">
+        CP
+      </a >
+      <a  class="simple-text logo-normal">
+        CryptoPrice
+      </a>
+    </div>
+    <div class="sidebar-wrapper" >
+      <ul class="nav">
+        <li>
+
+          <a href=<%=root_path %>
+                 <p style="font-size:20px">BTC</p>
+          </a>
+        </li>
+        <li>
+          <%= link_to "LTC" , ltc_url, {:style=>'font-size:20px',} %>
+
+
+        </li>
+        <li>
+          <%= link_to "ETH" , eth_url, {:style=>'font-size:20px',} %>
+
+        </li>
+        <li>
+          <%= link_to "BCH" , bch_url, {:style=>'font-size:20px',} %>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="main-panel">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="navbar-toggle">
+            <button type="button" class="navbar-toggler">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
+            </button>
+          </div>
+          <a class="navbar-brand" >Last 24 Hours Prices </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="panel-header panel-header-lg">
+      <canvas height="50px" id="bigDashboardChart"></canvas>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="card card-chart">
+            <div class="card-header">
+              <h5 class="card-category">BCH</h5>
+              <h4 class="card-title"><strong>Bitfinex</strong> Oscilator K% S%</h4>
+            </div>
+            <div class="card-body">
+              <div class=" panel-header-lg" >
+                <canvas height="50px" id="barChartSimpleGradientsNumbers1"></canvas>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <div class="card card-chart">
+            <div class="card-header">
+              <h5 class="card-category">BCH</h5>
+              <h4 class="card-title"> <strong>Bitstamp</strong> Oscilator K% S%</h4>
+            </div>
+            <div class="card-body">
+              <div class=" panel-header-lg" >
+                <canvas height="50px" id="barChartSimpleGradientsNumbers2"></canvas>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12">
+          <div class="card card-chart">
+            <div class="card-header">
+              <h5 class="card-category">BCH</h5>
+              <h4 class="card-title"><strong>Buda</strong> Oscilator K% S%</h4>
+            </div>
+            <div class="card-body">
+              <div class=" panel-header-lg" >
+                <canvas height="50px" id="barChartSimpleGradientsNumbers3"></canvas>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+      </div>
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+</div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container-fluid">
+        <nav>
+          <ul>
+            <li>
+              <%=link_to  "BITFINEX", "https://www.bitfinex.com/" %>
+              </a>
+            </li>
+            <li>
+              <%=link_to  "BUDA", "https://www.buda.com" %>
+              </a>
+            </li>
+            <li>
+              <%=link_to  "BITSTAMP", "https://www.bitstamp.net/" %>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
+  </div>
+</div>
+</body>
+
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
+<!-- Chart JS -->
+<script src="../assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<script>
+ var doc = document.getElementById("headername");
+ doc.innerHTML = "BCH stochastic oscillator"
+</script>
+
+
+<script>
+
+    var ctx = document.getElementById("barChartSimpleGradientsNumbers1").getContext('2d');
+    var dataFirst1 = {
+        label: "K%",
+        data: <%= raw(@kbitfinex.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'orange',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'orange',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'rect'
+    };
+
+    var dataSecond1 = {
+        label: "S%",
+        data: <%= raw(@sbitfinex.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'purple',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'purple',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+    var dataThird1 = {
+        label: "Oversold",
+        data: <%= raw(@soldbitfinex.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'black',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'black',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+    var dataFourth1 = {
+        label: "Overbought",
+        data: <%= raw(@buybitfinex.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'green',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'green',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+    var dataFifth1 = {
+        label: "Mean",
+        data: <%= raw(@medbitfinex.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'grey',
+        borderDash: [5, 5],
+        backgroundColor: 'transparent',
+        pointBorderColor: 'grey',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+
+    var speedData = {
+        labels: <%= raw(@day_timestamps.to_json) %>,
+        datasets: [dataFirst1, dataSecond1, dataThird1,dataFourth1,dataFifth1]
+    };
+
+    var chartOptions = {
+        legend: {
+            display: true,
+            position: 'top',
+            labels: {
+                boxWidth: 80,
+                fontColor: 'black'
+            }
+        }
+    };
+
+    var lineChart = new Chart(ctx, {
+        type: 'line',
+        data: speedData,
+        options: chartOptions
+    });
+
+    var ctx1 = document.getElementById("bigDashboardChart").getContext('2d');
+
+
+    var dataFirst = {
+        label: "Bitfinex",
+        data: <%= raw(@day_bitfinex.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'red',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'red',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'rect'
+    };
+
+    var dataSecond = {
+        label: "Bitstamp",
+        data: <%= raw(@day_bitstamp.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: '#36a2eb',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'purple',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+    var dataThird = {
+        label: "Buda",
+        data: <%= raw(@day_buda.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'yellow',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'purple',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+
+    var speedData = {
+        labels: <%= raw(@day_timestamps.to_json) %>,
+        datasets: [dataFirst, dataSecond, dataThird]
+    };
+
+    var chartOptions = {
+        legend: {
+            display: true,
+            position: 'top',
+            labels: {
+                boxWidth: 80,
+                fontColor: 'white'
+            }
+        }
+    };
+
+    var lineChart = new Chart(ctx1, {
+        type: 'line',
+        data: speedData,
+        options: chartOptions
+    });
+
+    var ctx2 = document.getElementById("barChartSimpleGradientsNumbers2").getContext('2d');
+    var dataFirst1 = {
+        label: "K%",
+        data: <%= raw(@kbitstamp.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'orange',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'orange',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'rect'
+    };
+
+    var dataSecond1 = {
+        label: "S%",
+        data: <%= raw(@sbitstamp.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'purple',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'purple',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+    var dataThird1 = {
+        label: "Oversold",
+        data: <%= raw(@soldbitstamp.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'black',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'black',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+    var dataFourth1 = {
+        label: "Overbought",
+        data: <%= raw(@buybitstamp.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'green',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'green',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+    var dataFifth1 = {
+        label: "Mean",
+        data: <%= raw(@medbitstamp.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'grey',
+        borderDash: [5, 5],
+        backgroundColor: 'transparent',
+        pointBorderColor: 'grey',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+
+    var speedData = {
+        labels: <%= raw(@day_timestamps.to_json) %>,
+        datasets: [dataFirst1, dataSecond1, dataThird1,dataFourth1,dataFifth1]
+    };
+
+    var chartOptions = {
+        legend: {
+            display: true,
+            position: 'top',
+            labels: {
+                boxWidth: 80,
+                fontColor: 'black'
+            }
+        }
+    };
+
+    var lineChart = new Chart(ctx2, {
+        type: 'line',
+        data: speedData,
+        options: chartOptions
+    });
+
+
+
+    var ctx3 = document.getElementById("barChartSimpleGradientsNumbers3").getContext('2d');
+    var dataFirst1 = {
+        label: "K%",
+        data: <%= raw(@kbuda.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'orange',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'orange',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'rect'
+    };
+
+    var dataSecond1 = {
+        label: "S%",
+        data: <%= raw(@sbuda.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'purple',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'purple',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+    var dataThird1 = {
+        label: "Oversold",
+        data: <%= raw(@soldbuda.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'black',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'black',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+    var dataFourth1 = {
+        label: "Overbought",
+        data: <%= raw(@buybuda.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'green',
+        backgroundColor: 'transparent',
+        pointBorderColor: 'green',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+    var dataFifth1 = {
+        label: "Mean",
+        data: <%= raw(@medbuda.to_json)%>,
+        lineTension: 0.3,
+        fill: false,
+        borderColor: 'grey',
+        borderDash: [5, 5],
+        backgroundColor: 'transparent',
+        pointBorderColor: 'grey',
+        pointBackgroundColor: 'lightgreen',
+        pointRadius: 5,
+        pointHoverRadius: 15,
+        pointHitRadius: 30,
+        pointBorderWidth: 2
+    };
+
+    var speedData = {
+        labels: <%= raw(@day_timestamps.to_json) %>,
+        datasets: [dataFirst1, dataSecond1, dataThird1,dataFourth1,dataFifth1]
+    };
+
+    var chartOptions = {
+        legend: {
+            display: true,
+            position: 'top',
+            labels: {
+                boxWidth: 80,
+                fontColor: 'black'
+            }
+        }
+    };
+
+    var lineChart = new Chart(ctx3, {
+        type: 'line',
+        data: speedData,
+        options: chartOptions
+    });
+
+
+
+
+
+
+
+</script>
+
+
+

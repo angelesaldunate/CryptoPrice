@@ -59,7 +59,7 @@ class DataManager
     filtered_time = []
     count = 0
     times.each do |item|
-        if count%20 ==0
+        if count%60 ==0
           filtered_time.push(item)
         end
       count+=1
@@ -72,7 +72,7 @@ class DataManager
     final_crbs = []
     count = 0
     crbs.each do |item|
-      if count%20 ==0
+      if count%60 ==0
         final_crbs.push(item)
       end
       count+=1
@@ -81,7 +81,7 @@ class DataManager
     final_crbd = []
     count = 0
     crbd.each do |item|
-      if count%20 ==0
+      if count%60 ==0
         final_crbd.push(item)
       end
       count+=1
@@ -89,7 +89,7 @@ class DataManager
     final_crbf = []
     count = 0
     crbf.each do |item|
-      if count%20 ==0
+      if count%60 ==0
         final_crbf.push(item)
       end
       count+=1
